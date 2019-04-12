@@ -106,7 +106,6 @@ RUN echo "---> Enabling PHP-Alpine" && \
     sed -i "/error_log = .*/c\error_log = /proc/self/fd/2" /etc/php7/php-fpm.conf && \
     sed -i "/post_max_size = .*/c\post_max_size = 1000M" /etc/php7/php.ini && \
     sed -i "/upload_max_filesize = .*/c\upload_max_filesize = 1000M" /etc/php7/php.ini && \
-    sed -i "/zend_extension=xdebug/c\zend_extension=xdebug" /etc/php7/conf.d/00_xdebug.ini && \
     chown -R phpjasper:phpjasper /home/phpjasper && \
     chmod +x /scripts/start.sh && \
     rm -rf /tmp/*
