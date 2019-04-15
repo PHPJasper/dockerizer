@@ -14,19 +14,16 @@ if [[ $OPCACHE_MODE == "extreme" ]]; then
 fi
 
 if [[ $XDEBUG_ENABLED == true ]]; then
-    # enable xdebug extension
-    sudo sed -i "/;zend_extension=xdebug/c\zend_extension=xdebug" /etc/php7/conf.d/00_xdebug.ini
-
-    # enable xdebug remote config
-    sudo sed -i "/;xdebug.remote_enable=1/c\xdebug.remote_enable=1" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.remote_host=`/sbin/ip route|awk '/default/ { print $3 }'`/c\xdebug.remote_host=`/sbin/ip route|awk '/default/ { print $3 }'`" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.remote_port=9001/c\xdebug.remote_port=9001" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.remote_autostart=1/c\xdebug.remote_autostart=1" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.remote_connect_back=1/c\xdebug.remote_connect_back=1" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.cli_color=1/c\xdebug.cli_color=1" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.show_local_vars=1/c\xdebug.show_local_vars=1" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.idekey=phpjasper/c\xdebug.idekey=phpjasper" /etc/php7/conf.d/00_xdebug.ini
-    sudo sed -i "/;xdebug.scream=0/c\xdebug.scream=0" /etc/php7/conf.d/00_xdebug.ini
+    echo "[xdebug]" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.remote_enable=1" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.remote_host=`/sbin/ip route|awk '/default/ { print $3 }'`" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.remote_port=9001" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.remote_autostart=1" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.remote_connect_back=1" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.scream=0" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.cli_color=1" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.show_local_vars=1" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
+    echo "xdebug.idekey=phpjasper" | sudo tee -a /etc/php7/conf.d/00_xdebug.ini > /dev/null
 fi
 
 # run the original command
