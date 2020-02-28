@@ -110,6 +110,9 @@ RUN echo "---> Enabling PHP-Alpine" && \
     chmod +x /scripts/start.sh && \
     rm -rf /tmp/*
 
+RUN apk --no-cache add msttcorefonts-installer fontconfig --force-broken-world
+RUN update-ms-fonts
+
 # Define the running user
 USER phpjasper
 
